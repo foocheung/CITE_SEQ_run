@@ -1,0 +1,64 @@
+#!/usr/bin/perl
+$pwd=`pwd`;
+chomp $pwd;
+
+$ref1="$pwd/5gex_protein_feature_ref";
+$b=1;
+$t=2;
+#@array=('01','02','03','04','05','06','07','08','09','10','11','12');
+
+@array=('1','2','3','4','5','6','7','8');
+#@array=('9','10','11','12','13','14','15','16','18','19','20','21');
+foreach $a(@array){
+chomp;
+
+
+
+if ($a >= 7 ){
+open(DAT, ">multi_config_$a\.csv");
+print DAT<<END;
+[gene-expression]
+reference,/hpcdata/chi/PROJECTS_Archive/GALINA_TEST_SC/RTB5/cyte-seek/references/cyte-seek/hg38/refdata-gex-GRCh38-2020-A
+### REMOVE THIS force-cells,30000
+[feature]
+reference,/hpcdata/chi/PROJECTS_Archive/2022_CHI_PROPOSALS/Manthiram_Covid-tonsil_CHI-306/NEW_DATA_9_sept_2023/230908_A00941_1368_AHKVGVDSX2/RUN_23_306_3/feature_list.csv
+[vdj]
+reference,/hpcdata/sg/sg_data/users/martinsaj/CellRangerReference/refdata-cellranger-vdj-GRCh38-alts-ensembl-3.1.0
+[libraries]
+END
+print DAT "fastq_id,fastqs,lanes,feature_types,subsample_rate\n";
+print DAT "23_306_3_GEX$a,$pwd/GEX$a,any,gene expression\n";
+print DAT  "23_306_3_ADT$a,$pwd/ADT$a,any,antibody capture\n";
+print DAT  "23_306_3_TCR$a,$pwd/TCR$a,any,vdj\n";
+close DAT;
+}
+
+
+elsif ($a <= 6 ){
+open(DAT, ">multi_config_$a\.csv");
+print DAT<<END;
+[gene-expression]
+reference,/hpcdata/chi/PROJECTS_Archive/GALINA_TEST_SC/RTB5/cyte-seek/references/cyte-seek/hg38/refdata-gex-GRCh38-2020-A
+### REMOVE THIS force-cells,30000
+[feature]
+reference,/hpcdata/chi/PROJECTS_Archive/2022_CHI_PROPOSALS/Manthiram_Covid-tonsil_CHI-306/NEW_DATA_9_sept_2023/230908_A00941_1368_AHKVGVDSX2/RUN_23_306_3/feature_list.csv
+[vdj]
+reference,/hpcdata/sg/sg_data/users/martinsaj/CellRangerReference/refdata-cellranger-vdj-GRCh38-alts-ensembl-3.1.0
+[libraries]
+END
+print DAT "fastq_id,fastqs,lanes,feature_types,subsample_rate\n";
+print DAT "23_306_3_GEX$a,$pwd/GEX$a,any,gene expression\n";
+print DAT  "23_306_3_ADT$a,$pwd/ADT$a,any,antibody capture\n";
+print DAT  "23_306_3_BCR$a,$pwd/BCR$a,any,vdj\n";
+close DAT;
+}
+
+
+
+
+
+}
+
+
+
+
